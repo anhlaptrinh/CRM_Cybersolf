@@ -36,4 +36,44 @@ public class RoleRepository {
 		return listRoles;
 	}
 	
+	public int insertRole(String roleName, String desc) {
+		int rowInsert = 0;
+		String query = "INSERT INTO roles(name,description)VALUES(?,?)";
+		
+		Connection connection = MysqlConfig.getConnection();
+		
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, roleName);
+			statement.setString(2, desc);
+			
+			
+			rowInsert = statement.executeUpdate();
+			
+		} catch (Exception e) {
+			 System.out.println("deleteById : " + e.getLocalizedMessage());
+		}
+		
+		return rowInsert;
+		
+	}
+	
+	public int deleteRole(int id) {
+		int rowDeleted = 0;
+		String query = "DELETE FROM roles WHERE id = ?";
+		Connection connection = MysqlConfig.getConnection();
+		
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, id);
+			
+			rowDeleted = statement.executeUpdate();
+			
+		} catch (Exception e) {
+			 System.out.println("deleteById : " + e.getLocalizedMessage());
+		}
+		
+		return rowDeleted;
+	}
+	
 }

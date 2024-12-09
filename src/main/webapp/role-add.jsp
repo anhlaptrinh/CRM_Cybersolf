@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,15 +17,12 @@
 <link
 	href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css"
 	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <!-- animation CSS -->
 <link href="css/animate.css" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="css/style.css" rel="stylesheet">
 <!-- color CSS -->
 <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
-<link rel="stylesheet" href="./css/custom.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -35,9 +30,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-
 <body>
-	<!-- Preloader -->
 	<div class="preloader">
 		<div class="cssload-speeding-wheel"></div>
 	</div>
@@ -122,69 +115,47 @@
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Danh sách thành viên</h4>
+						<h4 class="page-title">Thêm mới quyền</h4>
 					</div>
-					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-						<a href="user-add" class="btn btn-sm btn-success">Thêm mới</a>
-					</div>
-					<!-- /.col-lg-12 -->
 				</div>
-				<!-- /row -->
+				<!-- /.row -->
+				<!-- .row -->
 				<%
-		String mess = (String) request.getAttribute("message");
-		%>
+				String mess = (String) request.getAttribute("message");
+				%>
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-md-2 col-12"></div>
+					<div class="col-md-8 col-xs-12">
 						<div class="white-box">
-							<div class="table-responsive">
-								<table class="table" id="example">
-									<thead>
-										<tr>
-											<th>STT</th>
-											<th>Fullname</th>
-											<th>Username</th>
-											<th>Role</th>
-											<th>Action: <span
-										style="<%=mess == null ? "display: none;" : "display: block;"%> color: red;">
-										<%=mess%>
-									</span></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="item" items="${listUser}">
-											<tr>
-												<td>${item.id}</td>
-												<td>${item.fullname}</td>
-												<td>${item.email}</td>
-												<td>${item.role_name}</td>
-												<td>
-													<form action="user-edit" method="post"
-														style="display: inline;">
-														<input type="hidden" name="id" value="${item.id}">
-														<input type="hidden" name="fullname"value="${item.fullname}"> 
-														<input type="hidden"name="email" value="${item.email}">
-														<input type="hidden" name="role" value="${item.role_name}">
-														<button type="submit" class="btn btn-sm btn-primary">Sửa</button>
-													</form>
-													
-													<a href="/crm07/users?id=${item.id}"
-													class="btn btn-sm btn-danger">Xóa</a>
-													<form action="user-details" method="post"
-														style="display: inline;">
-														<input type="hidden" name="id" value="${item.id}">
-														<input type="hidden" name="fullname"
-															value="${item.fullname}"> <input type="hidden"
-															name="email" value="${item.email}">
-														<button type="submit" class="btn btn-sm btn-info">Xem</button>
-													</form>
-												</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
+							<form action="role-add" method="post" class="form-horizontal form-material">
+								<div class="form-group">
+									<label class="col-md-12">Tên quyền</label>
+									<div class="col-md-12">
+										<input type="text" placeholder="Tên quyền"
+											class="form-control form-control-line" name="tenquyen" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-12">Mô tả</label>
+									<div class="col-md-12">
+										<input type="text" placeholder="Mô tả" name="mota"
+											class="form-control form-control-line" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<button type="submit" class="btn btn-success">Add
+											Role</button>
+										<a href="roles" class="btn btn-primary">Quay lại</a> <span
+											style="<%=mess == null ? "display: none;" : "display: block;"%> color: red;">
+											<%=mess%>
+										</span>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
+					<div class="col-md-2 col-12"></div>
 				</div>
 				<!-- /.row -->
 			</div>
@@ -204,16 +175,9 @@
 		src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 	<!--slimscroll JavaScript -->
 	<script src="js/jquery.slimscroll.js"></script>
-	<script src="js/jquery.dataTables.js"></script>
 	<!--Wave Effects -->
 	<script src="js/waves.js"></script>
 	<!-- Custom Theme JavaScript -->
 	<script src="js/custom.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#example').DataTable();
-		});
-	</script>
 </body>
-
 </html>
